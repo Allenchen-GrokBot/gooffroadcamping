@@ -231,78 +231,103 @@
       letter-spacing: .12em;
       color: #cfcfcf;
     }
-    .partners-group { margin: 0 0 14px; }
+    .partners-group { margin: 0 0 18px; }
     .partners-group:last-child { margin-bottom: 0; }
-    .partners-label {
-      margin: 0 0 8px;
+    .partners-group h3 {
+      margin: 0 0 10px;
       font-size: 11px;
       letter-spacing: .08em;
+      font-weight: 600;
       color: #888;
     }
-    .partners-row {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .partners-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .pcard {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px 10px;
-    }
-    .partners-row a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      max-width: 100%;
-      padding: 5px 10px 5px 5px;
-      border-radius: 999px;
-      background: #1a1a1a;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px;
       border: 1px solid #2a2a2a;
-      color: #e8e8e8;
-      text-decoration: none;
-      font-size: 12.5px;
-      line-height: 1.3;
-      font-weight: 600;
-      transition: border-color .15s ease, background .15s ease, color .15s ease;
+      border-radius: 12px;
+      background: #1a1a1a;
+      min-width: 0;
     }
-    .partners-row a:hover,
-    .partners-row a:focus-visible {
-      border-color: var(--orange);
-      color: #fff;
-      background: #222;
+    .pcard-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      min-width: 0;
     }
-    .partners-row a:focus-visible {
-      outline: 2px solid var(--orange);
-      outline-offset: 2px;
-    }
-    .partners-row img {
-      width: 32px;
-      height: 32px;
+    .pcard-top img {
+      flex: none;
+      width: 56px;
+      height: 56px;
       object-fit: contain;
       border-radius: 50%;
       background: #111;
-      flex: none;
     }
-    .partners-row img.is-logo {
-      border-radius: 8px;
+    .pcard-top img.is-logo {
+      border-radius: 10px;
       background: #fff;
-      object-fit: contain;
-      padding: 2px;
+      border: 1px solid #2a2a2a;
+      padding: 4px;
     }
-
-    .partners-note {
-      margin: 8px 0 0;
-      font-size: 11px;
-      line-height: 1.55;
+    .pcard-name {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.35;
+      color: #e8e8e8;
+      word-break: break-word;
+    }
+    .pcard-desc {
+      margin: 2px 0 0;
+      font-size: 12.5px;
       color: #8a8a8a;
+      line-height: 1.5;
     }
-    .partners-note a {
+    .pcard-note {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #8a8a8a;
+      line-height: 1.55;
+    }
+    .pcard-note a {
       color: #cfcfcf;
       text-decoration: underline;
       text-underline-offset: 2px;
     }
+    .pcard .btn {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: auto;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      background: var(--orange);
+      border-radius: 8px;
+      transition: background .15s ease;
+    }
+    .pcard .btn:hover,
+    .pcard .btn:focus-visible {
+      background: var(--orange-dark);
+    }
+    .pcard .btn:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
     @media (min-width: 768px) {
       .partners { margin-top: 36px; padding-top: 28px; }
       .partners h2 { font-size: 13.5px; }
-      .partners-row a { font-size: 13px; }
+      .partners-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -328,22 +353,84 @@
       <div class="partners" aria-label="贊助廠商與ADV騎乘教育推廣推薦">
         <h2>贊助廠商與ADV騎乘教育推廣推薦</h2>
         <div class="partners-group">
-          <p class="partners-label">贊助廠商</p>
-          <ul class="partners-row">
-          <li><a href="https://www.facebook.com/profile.php?id=100075871546208" target="_blank" rel="noopener sponsored" title="筋功坊　日本傳統理筋整復推拿"><img src="assets/partners/jinggongfang.jpg" alt="" width="32" height="32"><span>筋功坊</span></a></li>
-          <li><a href="https://www.facebook.com/Yujan1994" target="_blank" rel="noopener sponsored" title="人體工廠　體態雕塑・私人健身教練"><img src="assets/partners/renti.jpg" alt="" width="32" height="32"><span>人體工廠</span></a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=100054234081641" target="_blank" rel="noopener sponsored" title="達陣電腦　電腦組裝・維修・買賣"><img src="assets/partners/dajhen.jpg" alt="" width="32" height="32"><span>達陣電腦</span></a></li>
-          <li><a href="https://www.wii.tw/" target="_blank" rel="noopener sponsored" title="電筒王　專業手電筒及戶外照明工具裝備商城"><img src="assets/partners/dian.png" alt="" class="is-logo" width="32" height="32"><span>電筒王</span></a></li>
-          </ul>
-          <p class="partners-note">電筒王：會員購買另有優惠，請先向主辦詢問確認價格。<a href="https://line.me/ti/p/r-mpS4YcJI" target="_blank" rel="noopener">聯絡主辦 LINE</a></p>
+          <h3>贊助廠商</h3>
+          <div class="partners-grid">
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/jinggongfang.jpg" alt="" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">筋功坊</h4>
+                  <p class="pcard-desc">日本傳統理筋整復推拿</p>
+                </div>
+              </div>
+              <a class="btn" href="https://www.facebook.com/profile.php?id=100075871546208" target="_blank" rel="noopener sponsored">前往 Facebook</a>
+            </article>
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/renti.jpg" alt="" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">人體工廠</h4>
+                  <p class="pcard-desc">體態雕塑・私人健身教練</p>
+                </div>
+              </div>
+              <a class="btn" href="https://www.facebook.com/Yujan1994" target="_blank" rel="noopener sponsored">前往 Facebook</a>
+            </article>
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/dajhen.jpg" alt="" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">達陣電腦</h4>
+                  <p class="pcard-desc">電腦組裝・維修・買賣</p>
+                </div>
+              </div>
+              <a class="btn" href="https://www.facebook.com/profile.php?id=100054234081641" target="_blank" rel="noopener sponsored">前往 Facebook</a>
+            </article>
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/dian.png" alt="" class="is-logo" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">電筒王</h4>
+                  <p class="pcard-desc">專業手電筒及戶外照明工具裝備商城</p>
+                  <p class="pcard-note">會員購買另有優惠，請先向主辦詢問確認價格。<a href="https://line.me/ti/p/r-mpS4YcJI" target="_blank" rel="noopener">聯絡主辦 LINE</a></p>
+                </div>
+              </div>
+              <a class="btn" href="https://www.wii.tw/" target="_blank" rel="noopener sponsored">前往官網</a>
+            </article>
+          </div>
         </div>
         <div class="partners-group">
-          <p class="partners-label">ADV騎乘教學・旅遊推薦・摩托運動協會</p>
-          <ul class="partners-row">
-          <li><a href="https://www.facebook.com/tmtmototravel" target="_blank" rel="noopener" title="TMT Moto Travel　BMW Motorrad Instructor Johnny Chen 國際教官，BMW ADV 公路／越野教學・國內外摩托旅遊"><img src="assets/partners/johnny.jpg" alt="" class="is-logo" width="32" height="32"><span>TMT Moto Travel</span></a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=100091336251988" target="_blank" rel="noopener" title="MSF 華德教練　在台推廣德國 ADV 騎乘觀念與教育"><img src="assets/partners/msf.jpg" alt="" width="32" height="32"><span>MSF 華德教練</span></a></li>
-          <li><a href="https://www.facebook.com/groups/794806212999828/" target="_blank" rel="noopener" title="臺灣動力極限運動協會"><img src="assets/partners/dongli.png" alt="" class="is-logo" width="32" height="32"><span>臺灣動力極限運動協會</span></a></li>
-          </ul>
+          <h3>ADV騎乘教學・旅遊推薦・摩托運動協會</h3>
+          <div class="partners-grid">
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/johnny.jpg" alt="" class="is-logo" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">TMT Moto Travel</h4>
+                  <p class="pcard-desc">BMW Motorrad Instructor Johnny Chen 國際教官，BMW ADV 公路／越野教學・國內外摩托旅遊</p>
+                </div>
+              </div>
+              <a class="btn" href="https://www.facebook.com/tmtmototravel" target="_blank" rel="noopener">前往 Facebook</a>
+            </article>
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/msf.jpg" alt="" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">MSF 華德教練</h4>
+                  <p class="pcard-desc">在台推廣德國 ADV 騎乘觀念與教育</p>
+                </div>
+              </div>
+              <a class="btn" href="https://www.facebook.com/profile.php?id=100091336251988" target="_blank" rel="noopener">前往 Facebook</a>
+            </article>
+            <article class="pcard">
+              <div class="pcard-top">
+                <img src="assets/partners/dongli.png" alt="" class="is-logo" width="56" height="56">
+                <div>
+                  <h4 class="pcard-name">臺灣動力極限運動協會</h4>
+                </div>
+              </div>
+              <a class="btn" href="https://www.facebook.com/groups/794806212999828/" target="_blank" rel="noopener">前往 Facebook</a>
+            </article>
+          </div>
         </div>
       </div>
     </div>
