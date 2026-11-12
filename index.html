@@ -287,10 +287,12 @@
       font-weight: 600;
       color: #888;
     }
+    .partners-group h3 { width: 100%; }
     .partners-grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+      align-items: stretch;
     }
     .pcard {
       display: flex;
@@ -301,6 +303,8 @@
       border-radius: 12px;
       background: #1a1a1a;
       min-width: 0;
+      height: 100%;
+      box-sizing: border-box;
     }
     .pcard-top {
       display: flex;
@@ -308,6 +312,7 @@
       gap: 10px;
       min-width: 0;
     }
+    .pcard-top > div { min-width: 0; flex: 1; }
     .pcard-top img {
       flex: none;
       width: 56px;
@@ -388,10 +393,75 @@
       outline: 2px solid #fff;
       outline-offset: 2px;
     }
+    @media (max-width: 699px) {
+      .partners-grid { gap: 8px; }
+      .pcard { gap: 6px; padding: 8px; border-radius: 10px; }
+      .pcard-top { gap: 6px; }
+      .pcard-top img { width: 36px; height: 36px; }
+      .pcard-top img.is-logo { border-radius: 6px; padding: 2px; }
+      .pcard-name { font-size: 12px; line-height: 1.3; }
+      .pcard-desc { font-size: 11px; line-height: 1.4; }
+      .pcard-desc:not(.pcard-tags) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+      }
+      .pcard-note {
+        margin: 3px 0 0;
+        font-size: 10.5px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+      }
+      .pcard-tags { gap: 4px; max-height: calc(1.35em * 4 + 12px); overflow: hidden; }
+      .pcard-tags span { padding: 2px 6px; font-size: 9.5px; }
+      .pcard .btn { padding: 6px 8px; font-size: 12px; min-height: 32px; letter-spacing: .04em; }
+    }
     @media (min-width: 768px) {
       .partners { margin-top: 36px; padding-top: 28px; }
       .partners h2 { font-size: 13.5px; }
-      .partners-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    /* v349 interact：贊助卡片與站內可點元素回饋（立即參與維持既有互動） */
+    .pcard {
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .pcard:hover, .pcard.is-press {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.45);
+      border-color: #3a3a3a;
+    }
+    .pcard:active { transform: scale(0.98); }
+    .pcard .btn {
+      transition: background .15s ease, transform .12s ease, box-shadow .15s ease, filter .15s ease;
+      -webkit-tap-highlight-color: rgba(255,107,0,.28);
+      touch-action: manipulation;
+    }
+    .pcard .btn:hover, .pcard .btn:focus-visible { filter: brightness(1.1); }
+    .pcard .btn:active, .pcard .btn.is-press {
+      transform: scale(0.96);
+      filter: brightness(1.12);
+    }
+    .pcard .btn:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+    .pcard-note a {
+      border-radius: 4px;
+      transition: color .15s ease, background .15s ease, transform .12s ease;
+      -webkit-tap-highlight-color: rgba(255,107,0,.28);
+    }
+    .pcard-note a:hover { color: #fff; background: #2a2a2a; }
+    .pcard-note a:active, .pcard-note a.is-press { transform: scale(0.96); }
+    .pcard-note a:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    @media (prefers-reduced-motion: reduce) {
+      .pcard, .pcard .btn, .pcard-note a { transition: none !important; }
+      .pcard:hover, .pcard:active, .pcard.is-press,
+      .pcard .btn:active, .pcard .btn.is-press,
+      .pcard-note a:active, .pcard-note a.is-press { transform: none !important; }
     }
   </style>
   <!-- Google tag (gtag.js)：僅後台 page_view，頁面無可見元件、不送個資 -->
@@ -613,6 +683,25 @@
         if (!going) a.classList.remove('is-press');
       }, { passive: true });
       window.addEventListener('pageshow', function () { restore(); });
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var SEL = '.pcard .btn, .pcard-note a, .pcard, #heroCta';
+      function clear() {
+        document.querySelectorAll('.is-press').forEach(function (n) {
+          if (n.id === 'heroCta' && n.classList.contains('is-busy')) return;
+          n.classList.remove('is-press');
+        });
+      }
+      document.addEventListener('pointerdown', function (e) {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        var t = e.target && e.target.closest && e.target.closest(SEL);
+        if (t) t.classList.add('is-press');
+      }, { passive: true });
+      document.addEventListener('pointerup', clear, { passive: true });
+      document.addEventListener('pointercancel', clear, { passive: true });
     })();
   </script>
 </body>
