@@ -160,12 +160,58 @@
       border-radius: 10px;
       box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,107,0,.25);
       transition: background .15s ease, transform .15s ease, box-shadow .15s ease;
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: rgba(255,107,0,.28);
+      touch-action: manipulation;
+      -webkit-animation: ctaBreathe 2.8s ease-in-out infinite;
+      animation: ctaBreathe 2.8s ease-in-out infinite;
     }
     .cta:hover,
     .cta:focus-visible {
       background: var(--orange-dark);
     }
     .cta:active { transform: translateY(1px); }
+    .cta.is-press,
+    .cta:active.is-press {
+      transform: scale(0.95);
+      background: #ff8614;
+      box-shadow: 0 0 0 2px rgba(255,180,80,.55), 0 0 28px rgba(255,107,0,.7), 0 8px 24px rgba(0,0,0,.35);
+      -webkit-animation: none;
+      animation: none;
+    }
+    .cta.is-busy { pointer-events: none; cursor: default; }
+    .cta-label { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+    .cta-spin {
+      display: inline-block;
+      width: 1em; height: 1em;
+      box-sizing: border-box;
+      border: 2px solid currentColor;
+      border-right-color: transparent;
+      border-radius: 50%;
+      -webkit-animation: ctaSpin .7s linear infinite;
+      animation: ctaSpin .7s linear infinite;
+      flex: none;
+    }
+    .cta-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,.45);
+      transform: scale(0);
+      animation: ctaRipple .6s ease-out;
+      pointer-events: none;
+    }
+    @-webkit-keyframes ctaBreathe {
+      0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,107,0,.25), 0 0 10px rgba(255,107,0,.2); }
+      50% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,107,0,.4), 0 0 22px rgba(255,107,0,.45); }
+    }
+    @keyframes ctaBreathe {
+      0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,107,0,.25), 0 0 10px rgba(255,107,0,.2); }
+      50% { box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 1px rgba(255,107,0,.4), 0 0 22px rgba(255,107,0,.45); }
+    }
+    @-webkit-keyframes ctaSpin { to { -webkit-transform: rotate(360deg); } }
+    @keyframes ctaSpin { to { transform: rotate(360deg); } }
+    @keyframes ctaRipple { to { transform: scale(2.6); opacity: 0; } }
     .cta:focus-visible {
       outline: 3px solid #fff;
       outline-offset: 3px;
@@ -216,7 +262,8 @@
       .cta { margin-top: 16px; padding: 10px 28px; font-size: 16px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .cta { transition: none; }
+      .cta { transition: none; -webkit-animation: none; animation: none; }
+      .cta-spin, .cta-ripple { -webkit-animation: none; animation: none; }
     }
 
     .partners {
@@ -368,7 +415,7 @@
         <img class="logo" src="assets/logo.png" width="960" height="244" alt="GoOffRoad Camping">
         <p class="name" aria-label="下班越野露營趣"><span>下</span><span>班</span><span>越</span><span>野</span><span>露</span><span>營</span><span>趣</span></p>
       </div>
-      <a class="cta" href="https://script.google.com/macros/s/AKfycbysStmrIUpy1XtyZO_-eJEgCmsuZsjhbncW5Z_UOO2S0q4ePW1hurQ1O82ItL-kUVlv/exec" target="_top" rel="noopener">立即參與</a>
+      <a class="cta" id="heroCta" href="https://script.google.com/macros/s/AKfycbysStmrIUpy1XtyZO_-eJEgCmsuZsjhbncW5Z_UOO2S0q4ePW1hurQ1O82ItL-kUVlv/exec" target="_top" rel="noopener"><span class="cta-label">立即參與</span></a>
     </main>
   </div>
   <section class="about" aria-label="簡介">
@@ -503,6 +550,69 @@
       if (logo.complete) run();
       else logo.addEventListener('load', run);
       window.addEventListener('resize', fitName);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var a = document.getElementById('heroCta');
+      if (!a) return;
+      var label = a.querySelector('.cta-label') || a;
+      var idleText = '立即參與';
+      var going = false;
+      var timer = 0;
+      function ripple(ev) {
+        var r = a.getBoundingClientRect();
+        var src = (ev && ev.changedTouches && ev.changedTouches[0]) || ev;
+        var x = (src && typeof src.clientX === 'number') ? src.clientX - r.left : r.width / 2;
+        var y = (src && typeof src.clientY === 'number') ? src.clientY - r.top : r.height / 2;
+        var size = Math.max(r.width, r.height) * 1.15;
+        var s = document.createElement('span');
+        s.className = 'cta-ripple';
+        s.style.width = s.style.height = size + 'px';
+        s.style.left = (x - size / 2) + 'px';
+        s.style.top = (y - size / 2) + 'px';
+        a.appendChild(s);
+        setTimeout(function () { if (s.parentNode) s.parentNode.removeChild(s); }, 650);
+      }
+      function restore() {
+        going = false;
+        if (timer) { clearTimeout(timer); timer = 0; }
+        a.classList.remove('is-press', 'is-busy');
+        a.removeAttribute('aria-busy');
+        label.textContent = idleText;
+      }
+      function go(ev) {
+        if (going) { ev.preventDefault(); return; }
+        going = true;
+        ev.preventDefault();
+        a.classList.add('is-press', 'is-busy');
+        a.setAttribute('aria-busy', 'true');
+        ripple(ev);
+        label.textContent = '';
+        var spin = document.createElement('span');
+        spin.className = 'cta-spin';
+        spin.setAttribute('aria-hidden', 'true');
+        label.appendChild(spin);
+        label.appendChild(document.createTextNode('前往中…'));
+        var href = a.getAttribute('href') || '';
+        timer = setTimeout(function () {
+          if (a.target === '_top' && window.top) window.top.location.href = href;
+          else window.location.href = href;
+        }, 300);
+      }
+      a.addEventListener('click', go);
+      a.addEventListener('touchstart', function (ev) {
+        a.classList.add('is-press');
+        if (!going) ripple(ev);
+      }, { passive: true });
+      a.addEventListener('touchend', function () {
+        if (!going) a.classList.remove('is-press');
+      }, { passive: true });
+      a.addEventListener('touchcancel', function () {
+        if (!going) a.classList.remove('is-press');
+      }, { passive: true });
+      window.addEventListener('pageshow', function () { restore(); });
     })();
   </script>
 </body>
