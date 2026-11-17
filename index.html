@@ -45,6 +45,7 @@
   </script>
 
   <style>
+    picture { display: contents; }
     :root {
       --orange: #FF6B00;
       --orange-cta: #AB4800;
@@ -478,12 +479,20 @@
 <body>
   <h1 class="sr-only">下班越野露營趣 GoOffRoad Camping</h1>
   <div class="stage">
-    <img class="hero" src="assets/hero.jpg" alt="四名重機騎士在夕陽林道上騎向山巔金黃佛塔">
+    <picture>
+      <source type="image/avif" srcset="assets/hero.avif">
+      <source type="image/webp" srcset="assets/hero.webp">
+      <img class="hero" src="assets/hero.jpg" width="1200" height="630" alt="四名重機騎士在夕陽林道上騎向山巔金黃佛塔">
+    </picture>
     <div class="veil" aria-hidden="true"></div>
     <div class="accent" aria-hidden="true"></div>
     <main>
       <div class="brand">
-        <img class="logo" src="assets/logo.png" width="960" height="244" alt="GoOffRoad Camping">
+        <picture>
+          <source type="image/avif" srcset="assets/logo-720.avif 720w, assets/logo.avif 960w" sizes="(min-width: 768px) min(52vw, 560px), min(78vw, 420px)">
+          <source type="image/webp" srcset="assets/logo-720.webp 720w, assets/logo.webp 960w" sizes="(min-width: 768px) min(52vw, 560px), min(78vw, 420px)">
+          <img class="logo" src="assets/logo.png" srcset="assets/logo-720.png 720w, assets/logo.png 960w" sizes="(min-width: 768px) min(52vw, 560px), min(78vw, 420px)" width="960" height="244" alt="GoOffRoad Camping" fetchpriority="high">
+        </picture>
         <p class="name" aria-label="下班越野露營趣"><span>下</span><span>班</span><span>越</span><span>野</span><span>露</span><span>營</span><span>趣</span></p>
       </div>
       <a class="cta" id="heroCta" href="https://script.google.com/macros/s/AKfycbysStmrIUpy1XtyZO_-eJEgCmsuZsjhbncW5Z_UOO2S0q4ePW1hurQ1O82ItL-kUVlv/exec" target="_top" rel="noopener"><span class="cta-label">立即參與</span></a>
@@ -501,7 +510,11 @@
           <div class="partners-grid">
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/jinggongfang.avif">
+                <source type="image/webp" srcset="assets/partners/jinggongfang.webp">
                 <img src="assets/partners/jinggongfang.jpg" alt="筋功坊 標誌" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">筋功坊</h4>
                   <p class="pcard-desc">日本傳統理筋整復推拿</p>
@@ -511,7 +524,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/renti.avif">
+                <source type="image/webp" srcset="assets/partners/renti.webp">
                 <img src="assets/partners/renti.jpg" alt="人體工廠 標誌" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">人體工廠</h4>
                   <p class="pcard-desc">體態雕塑・私人健身教練</p>
@@ -521,7 +538,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/dajhen.avif">
+                <source type="image/webp" srcset="assets/partners/dajhen.webp">
                 <img src="assets/partners/dajhen.jpg" alt="達陣電腦 標誌" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">達陣電腦</h4>
                   <p class="pcard-desc">電腦組裝・維修・買賣</p>
@@ -531,7 +552,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/paozhang.avif">
+                <source type="image/webp" srcset="assets/partners/paozhang.webp">
                 <img src="assets/partners/paozhang.png" alt="砲長の車車旅行影像&amp;手作紀錄 標誌" class="is-logo" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">砲長の車車旅行影像&手作紀錄</h4>
                 </div>
@@ -550,7 +575,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/beariscomming.avif">
+                <source type="image/webp" srcset="assets/partners/beariscomming.webp">
                 <img src="assets/partners/beariscomming.jpg" alt="熊來了 標誌" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">熊來了</h4>
                 </div>
@@ -559,7 +588,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/dian.avif">
+                <source type="image/webp" srcset="assets/partners/dian.webp">
                 <img src="assets/partners/dian.png" alt="電筒王 標誌" class="is-logo" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">電筒王</h4>
                   <p class="pcard-desc">專業手電筒及戶外照明工具裝備商城</p>
@@ -575,7 +608,11 @@
           <div class="partners-grid">
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/johnny.avif">
+                <source type="image/webp" srcset="assets/partners/johnny.webp">
                 <img src="assets/partners/johnny.jpg" alt="TMT Moto Travel 標誌" class="is-logo" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">TMT Moto Travel</h4>
                   <p class="pcard-desc">BMW Motorrad Instructor Johnny Chen 國際教官，BMW ADV 公路／越野教學・國內外摩托旅遊</p>
@@ -585,7 +622,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/msf.avif">
+                <source type="image/webp" srcset="assets/partners/msf.webp">
                 <img src="assets/partners/msf.jpg" alt="MSF 華德教練 標誌" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">MSF 華德教練</h4>
                   <p class="pcard-desc">在台推廣德國 ADV 騎乘觀念與教育</p>
@@ -595,7 +636,11 @@
             </article>
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/zothrental.avif">
+                <source type="image/webp" srcset="assets/partners/zothrental.webp">
                 <img src="assets/partners/zothrental.png" alt="峠猿－日本重機出租旅遊 標誌" class="is-logo" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">峠猿－日本重機出租旅遊</h4>
                   <p class="pcard-desc">峠猿提供日本重機租車與重機旅遊服務，包含富士山、北海道經典路線；可從成田出發預約車款、於千葉縣酒酒井町門市取車，並有自由行與跟團騎旅。</p>
@@ -606,7 +651,11 @@
 
             <article class="pcard">
               <div class="pcard-top">
+                <picture>
+                <source type="image/avif" srcset="assets/partners/dongli.avif">
+                <source type="image/webp" srcset="assets/partners/dongli.webp">
                 <img src="assets/partners/dongli.png" alt="臺灣動力極限運動協會 標誌" class="is-logo" width="56" height="56">
+              </picture>
                 <div>
                   <h4 class="pcard-name">臺灣動力極限運動協會</h4>
                 </div>
